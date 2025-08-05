@@ -1,0 +1,12 @@
+# ignorar o banco sqlite usado no desenvolvimento
+db.sqlite3
+
+# cache e compiladores python
+__pycache__/
+
+#migrations do django
+**/migrations/
+
+#venv do projeto
+venv/
+env/
