@@ -11,9 +11,10 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS('O Arquivo de CNPJS é muito grande, então tome um café enquanto isso :)'))
         call_command('makemigrations')
         call_command('migrate')
-        admin = User.objects.create_superuser('rafael_admin', 'rafael@arko.com', 'admin123')
-        user = User.objects.create_user(username='rafael_user',password='user123')
+        pswd = 'admin123'
+        admin = User.objects.create_superuser('rafael_admin', 'rafael@arko.com', pswd)
         call_command('importar_ibge_distritos')
         call_command('importar_empresas')
         
         self.stdout.write(self.style.SUCCESS('Banco populado'))
+        self.stdout.write(self.style.SUCCESS(f'Usuário administrador criado: {admin.username}, senha: {pswd}'))

@@ -1,17 +1,23 @@
 import django_tables2 as tables
 from .models.localidades import Estado, Municipio, Distrito
+from .models.empresas import Empresa
 
-class EstadoTable(tables.Table):
+#classe base evitar linhas de codigo repetidas
+class BaseTable(tables.Table):
     class Meta:
+        template_name = "django_tables2/bootstrap.html"
+
+class EstadoTable(BaseTable):
+    class Meta(BaseTable.Meta):
         model = Estado
-        template_name = "django_tables2/bootstrap.html"
 
-class MunicipioTable(tables.Table):
-    class Meta:
+class MunicipioTable(BaseTable):
+    class Meta(BaseTable.Meta):
         model = Municipio
-        template_name = "django_tables2/bootstrap.html"
-
-class DistritoTable(tables.Table):
-    class Meta:
+class DistritoTable(BaseTable):
+    class Meta(BaseTable.Meta):
         model = Distrito
-        template_name = "django_tables2/bootstrap.html"
+
+class EmpresaTable(BaseTable):
+    class Meta(BaseTable.Meta):
+        model = Empresa

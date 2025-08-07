@@ -16,7 +16,8 @@ class Command(BaseCommand):
             raise CommandError(f'O arquivo "{csv_path}" não foi encontrado.')
 
         #estava fazendo uma iteração comum no csv porém o arquivo é muito grande e precisei de uma nova abordagem com pandas
-        for chunk in pd.read_csv(csv_path, sep=';', encoding='latin1', chunksize=100000):
+        #limitando o numero de linhas em 200000 por que o csv original possui mais de 1800000, para facilitar a importação
+        for chunk in pd.read_csv(csv_path,nrows=200000 ,sep=';', encoding='latin1', chunksize=100000):
             empresas = []
             for _, row in chunk.iterrows():
                 empresa = Empresa(
@@ -33,5 +34,3 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.SUCCESS(f'Empresa {empresa.nome_razao_social} adicionada à lista para importação.'))
 
             Empresa.objects.bulk_create(empresas, batch_size=5000)
-            print(f'Lote de {len(empresas)} empresas importadas com sucesso.')
-

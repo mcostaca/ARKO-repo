@@ -1,5 +1,5 @@
 [project]
-name = "arkoapp"
+name = "core"
 version = "0.1.0"
 description = "Teste tecnico para a empresa ARKO"
 authors = [

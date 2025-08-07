@@ -53,4 +53,4 @@ class Empresa(models.Model):
         ]
 
     def __str__(self):
-        return f"{self.nome_razao_social} ({self.cnpj})"
+        return f"{self.nome_razao_social} ({self.cnpj_basico})"

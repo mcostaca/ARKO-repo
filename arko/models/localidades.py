@@ -93,11 +93,11 @@ class RegiaoImediata(BaseModel):
         return f"{self.nome} ({self.regiao_intermediaria.nome})"
 
 class Municipio(BaseModel):
-    microrregiao = models.ForeignKey(Microregiao, on_delete=models.CASCADE, related_name="municipios", null=True, blank=True)
-    mesoregiao = models.ForeignKey(Mesoregiao, on_delete=models.CASCADE, related_name="municipios", null=True, blank=True)
-    estado = models.ForeignKey(Estado, on_delete=models.CASCADE, related_name="municipios")
-    regiao_imediata = models.ForeignKey(RegiaoImediata, on_delete=models.CASCADE, related_name="municipios", null=True, blank=True)
-    regiao_intermediaria = models.ForeignKey(RegiaoIntermediaria, on_delete=models.CASCADE, related_name="municipios", null=True, blank=True)
+    microrregiao = models.ForeignKey(Microregiao, on_delete=models.CASCADE, null=True, blank=True)
+    mesoregiao = models.ForeignKey(Mesoregiao, on_delete=models.CASCADE, null=True, blank=True)
+    estado = models.ForeignKey(Estado, on_delete=models.CASCADE)
+    regiao_imediata = models.ForeignKey(RegiaoImediata, on_delete=models.CASCADE, null=True, blank=True)
+    regiao_intermediaria = models.ForeignKey(RegiaoIntermediaria, on_delete=models.CASCADE, null=True, blank=True)
     class Meta:
         app_label = 'arko'
         verbose_name = "Município"
