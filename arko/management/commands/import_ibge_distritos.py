@@ -1,6 +1,6 @@
 import requests
 from django.core.management.base import BaseCommand
-from arko.models import Regiao, Estado, Mesoregiao, Microregiao, Municipio, Distrito, RegiaoIntermediaria, RegiaoImediata
+from arko.models.localidades import Regiao, Estado, Mesoregiao, Microregiao, Municipio, Distrito, RegiaoIntermediaria, RegiaoImediata
 
 class Command(BaseCommand):
     help = 'Importa dados do endpoint do IBGE e persiste na base default.'
@@ -27,10 +27,10 @@ class Command(BaseCommand):
                 estado_data = uf_temp or {}
                 regiao_data = estado_data.get('regiao') or {}
             # path caso não houver mesorregiao buscar via uf_temp
-            meso_fallback = None
+            meso_temp = None
             if not meso_data and uf_temp:
-                meso_fallback = {'id': None, 'nome': '', 'UF': estado_data}
-                meso_data = meso_fallback
+                meso_temp = {'id': None, 'nome': '', 'UF': estado_data}
+                meso_data = meso_temp
             # se não houver microrregiao, criar dummy
             if not micro_data and meso_data:
                 micro_data = {'id': None, 'nome': '', 'mesorregiao': meso_data}

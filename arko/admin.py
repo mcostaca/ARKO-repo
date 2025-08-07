@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Regiao, Estado, Mesoregiao, Microregiao, RegiaoIntermediaria, RegiaoImediata, Municipio, Distrito
+from .models.localidades import Regiao, Estado, Mesoregiao, Microregiao, RegiaoIntermediaria, RegiaoImediata, Municipio, Distrito
 # Register your models here.
 
 
