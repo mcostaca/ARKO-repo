@@ -4,7 +4,7 @@ from django.db import models
 '''utilizando f-strings para nomear as tabelas e relacionamentos, 
 utilizo dbeaver como sgdb e considero uma boa pratica 
 nomear a tabela como app_nome_do_model'''
-
+app_label = 'arko'
 
 #Não costumo usar um abstract model, mas nesse caso é interessante para evitar repetição de código
 class BaseModel(models.Model):

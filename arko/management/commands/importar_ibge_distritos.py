@@ -10,7 +10,7 @@ class Command(BaseCommand):
         response = requests.get(url)
         data = response.json()
         #um print estilizado apenas para guiar o começo do script
-        self.stdout.write(self.style.SUCCESS('Importação iniciada'))
+        self.stdout.write(self.style.SUCCESS('Importação dos dados da API do ibge iniciada'))
 
         for distrito in data:
             municipio_data = distrito.get('municipio') or {}
@@ -27,10 +27,10 @@ class Command(BaseCommand):
                 estado_data = uf_temp or {}
                 regiao_data = estado_data.get('regiao') or {}
             # path caso não houver mesorregiao buscar via uf_temp
-            meso_temp = None
+            meso_fallback = None
             if not meso_data and uf_temp:
-                meso_temp = {'id': None, 'nome': '', 'UF': estado_data}
-                meso_data = meso_temp
+                meso_fallback = {'id': None, 'nome': '', 'UF': estado_data}
+                meso_data = meso_fallback
             # se não houver microrregiao, criar dummy
             if not micro_data and meso_data:
                 micro_data = {'id': None, 'nome': '', 'mesorregiao': meso_data}
@@ -93,6 +93,6 @@ class Command(BaseCommand):
                 )
             except Exception as e:
                 #mensagem com JSON caso erro
-                 self.stdout.write(self.style.WARNING('Erro ao persistir uma resposta', distrito))
+                self.stdout.write(self.style.WARNING('Erro ao persistir uma resposta', distrito))
         #mensagem fim do script
-        self.stdout.write(self.style.SUCCESS('Importação concluída!'))        
+        self.stdout.write(self.style.SUCCESS('Importação concluida!'))        

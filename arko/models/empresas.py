@@ -1,4 +1,5 @@
 from django.db import models
+app_label = 'arko'
 
 class Empresa(models.Model):
 
@@ -8,7 +9,7 @@ class Empresa(models.Model):
     qualificacao_responsavel = models.CharField(max_length=2)
     capital_social = models.DecimalField(max_digits=20, decimal_places=2)
     porte_empresa = models.CharField(max_length=2)
-
+    ente_federativo_responsavel = models.CharField(max_length=2, null=True, blank=True)
     #no CSV apenas possuia os campos acima, então decidi não utilizar todos os campos
     '''
     cnpj_ordem
@@ -44,7 +45,7 @@ class Empresa(models.Model):
     data_situacao_especial
     '''
     class Meta:
-        db_table = f'{app_label}_empresa'
+        db_table = f'{app_label}_Empresa'
         verbose_name = 'Empresa'
         verbose_name_plural = 'Empresas'
         permissions = [

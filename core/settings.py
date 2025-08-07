@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'arko',
     'django_tables2',
     'django_select2',
+    'arko.apps.ArkoConfig',
 ]
 
 MIDDLEWARE = [
